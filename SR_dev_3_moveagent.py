@@ -319,6 +319,4 @@ data = SmoothMovement()
 
 # data.robot_state_1()
 
-# data.agent_s1()
-
 data.move_agent()
