@@ -12,7 +12,8 @@ class SensorWorld:
         """WINDOW center"""
         self.root.geometry("610x840+535+30")
         """Window right side"""
-        self.root.geometry("610x840+1075+30")
+        # self.root.geometry("610x840+1075+30")
+        self.root.geometry("610x840+700+30")
         self.root.title('SENSOR WORLD'.center(150))
         self.frame = Canvas(bg='sea green', width=588, height=820)
         self.frame.pack()
@@ -38,6 +39,7 @@ class SensorWorld:
         self.beam_14 = ()
         self.beam_15 = ()
         self.beam_16 = ()
+        self.state_space = []
 
     def grid(self):
         """World"""
@@ -366,182 +368,190 @@ class SensorWorld:
         self.sensor_4 = self.frame.create_rectangle(s4, fill='red')
         self.agent = self.frame.create_oval(r, fill='cyan')
         self.frame.update()
-        """Activate sensors"""
-        for i in range(1, 5):
+
+        """check 1st time state entry"""
+
+        while current_state not in self.state_space:
+
+            self.state_space.append(current_state)
+            """Activate sensors"""
+            for i in range(1, 5):
+                time.sleep(0.1)
+                if i == 1:
+                    self.beam_1 = self.frame.create_polygon(484 + n * x, 514 + m * y, 494 + n * x, 514 + m * y,
+                                                            494 + n * x, 516 + m * y, 486 + n * x, 516 + m * y,
+                                                            486 + n * x, 514 + m * y, fill='yellow')
+                    self.beam_2 = self.frame.create_polygon(513 + n * x, 494 + m * y, 514 + n * x, 486 + m * y,
+                                                            516 + n * x, 486 + m * y, 516 + n * x, 494 + m * y,
+                                                            513 + n * x, 494 + m * y, fill='yellow')
+                    self.beam_3 = self.frame.create_polygon(536 + n * x, 514 + m * y, 544 + n * x, 514 + m * y,
+                                                            544 + n * x, 516 + m * y, 536 + n * x, 516 + m * y,
+                                                            536 + n * x, 514 + m * y, fill='yellow')
+                    self.beam_4 = self.frame.create_polygon(514 + n * x, 536 + m * y, 514 + n * x, 544 + m * y,
+                                                            516 + n * x, 544 + m * y, 516 + n * x, 536 + m * y,
+                                                            514 + n * x, 536 + m * y, fill='yellow')
+                if i == 2:
+                    self.beam_5 = self.frame.create_polygon(484 - a + n * x, 514 + m * y, 494 - a + n * x,
+                                                            514 + m * y, 494 - a + n * x, 516 + m * y, 486 - a + n * x,
+                                                            516 + m * y, 486 - a + n * x, 514 + m * y, fill='yellow')
+                    self.beam_6 = self.frame.create_polygon(513 + n * x, 494 - b + m * y, 514 + n * x, 486 - b + m * y,
+                                                            516 + n * x, 486 - b + m * y, 516 + n * x, 494 - b + m * y,
+                                                            513 + n * x, 494 - b + m * y, fill='yellow')
+                    self.beam_7 = self.frame.create_polygon(536 + a + n * x, 514 + m * y, 544 + a + n * x, 514 + m * y,
+                                                            544 + a + n * x, 516 + m * y, 536 + a + n * x, 516 + m * y,
+                                                            536 + a + n * x, 514 + m * y, fill='yellow')
+                    self.beam_8 = self.frame.create_polygon(514 + n * x, 536 + b + m * y, 514 + n * x, 544 + b + m * y,
+                                                            516 + n * x, 544 + b + m * y, 516 + n * x, 536 + b + m * y,
+                                                            514 + n * x, 536 + b + m * y, fill='yellow')
+                if i == 3:
+                    self.beam_9 = self.frame.create_polygon(484 - 2 * a + n * x, 514 + m * y, 494 - 2 * a + n * x,
+                                                            514 + m * y, 494 - 2 * a + n * x, 516 + m * y,
+                                                            486 - 2 * a + n * x, 516 + m * y, 486 - 2 * a + n * x,
+                                                            514 + m * y, fill='yellow')
+                    self.beam_10 = self.frame.create_polygon(514 + n * x, 494 - 2 * b + m * y, 514 + n * x,
+                                                             486 - 2 * b + m * y, 516 + n * x, 486 - 2 * b + m * y,
+                                                             516 + n * x, 494 - 2 * b + m * y, 514 + n * x,
+                                                             494 - 2 * b + m * y, fill='yellow')
+                    self.beam_11 = self.frame.create_polygon(536 + 2 * a + n * x, 514 + m * y, 544 + 2 * a + n * x,
+                                                             514 + m * y, 544 + 2 * a + n * x, 516 + m * y,
+                                                             536 + 2 * a + n * x, 516 + m * y, 536 + 2 * a + n * x,
+                                                             514 + m * y, fill='yellow')
+                    self.beam_12 = self.frame.create_polygon(514 + n * x, 536 + 2 * b + m * y, 514 + n * x,
+                                                             544 + 2 * b + m * y, 516 + n * x, 544 + 2 * b + m * y,
+                                                             516 + n * x, 536 + 2 * b + m * y, 514 + n * x,
+                                                             536 + 2 * b + m * y, fill='yellow')
+                if i == 4:
+                    self.beam_13 = self.frame.create_polygon(484 - 3 * a + n * x, 514 + m * y, 494 - 3 * a + n * x,
+                                                             514 + m * y, 494 - 3 * a + n * x, 516 + m * y,
+                                                             486 - 3 * a + n * x, 516 + m * y, 486 - 3 * a + n * x,
+                                                             514 + m * y, fill='yellow')
+                    self.beam_14 = self.frame.create_polygon(514 + n * x, 494 - 3 * b + m * y, 514 + n * x,
+                                                             486 - 3 * b + m * y, 516 + n * x, 486 - 3 * b + m * y,
+                                                             516 + n * x, 494 - 3 * b + m * y, 514 + n * x,
+                                                             494 - 3 * b + m * y, fill='yellow')
+                    self.beam_15 = self.frame.create_polygon(536 + 3 * a + n * x, 514 + m * y, 544 + 3 * a + n * x,
+                                                             514 + m * y, 544 + 3 * a + n * x, 516 + m * y,
+                                                             536 + 3 * a + n * x, 516 + m * y, 536 + 3 * a + n * x,
+                                                             514 + m * y, fill='yellow')
+                    self.beam_16 = self.frame.create_polygon(514 + n * x, 536 + 3 * b + m * y, 514 + n * x,
+                                                             544 + 3 * b + m * y, 516 + n * x, 544 + 3 * b + m * y,
+                                                             516 + n * x, 536 + 3 * b + m * y, 514 + n * x,
+                                                             536 + 3 * b + m * y, fill='yellow')
+                self.frame.update()
+            """"add walls and block"""
+            """state 1"""
+            if current_state == states[0][0]:
+                self.frame.create_rectangle(350, 350, 570, 460, fill='grey')
+                self.frame.create_rectangle(350, 570, 570, 680, fill='grey')
+                self.frame.create_line(460, 460, 460, 570, fill='white', width=3)
+                self.frame.create_line(460, 460, 570, 460, fill='white', width=5)
+                self.frame.create_line(460, 570, 570, 570, fill='white', width=5)
+            """state 2"""
+            if current_state == states[1][0]:
+                self.frame.create_line(350, 460, 460, 460, fill='white', width=5)
+                self.frame.create_line(350, 570, 460, 570, fill='white', width=5)
+            """state 3"""
+            if current_state == states[2][0]:
+                self.frame.create_rectangle(130, 350, 240, 570, fill='grey')
+                self.frame.create_line(240, 460, 240, 570, fill='white', width=5)
+            """state 4"""
+            if current_state == states[3][0]:
+                self.frame.create_line(240, 350, 240, 460, fill='white', width=5)
+                self.frame.create_line(350, 350, 350, 460, fill='white', width=5)
+            """state 6"""
+            if current_state == states[5][0]:
+                self.frame.create_rectangle(20, 20, 240, 240, fill='grey')
+                self.frame.create_line(130, 240, 240, 240, fill='white', width=5)
+                self.frame.create_line(130, 350, 240, 350, fill='white', width=5)
+                self.frame.create_line(240, 240, 240, 20, fill='white', width=5)
+            """state 7"""
+            if current_state == states[6][0]:
+                self.frame.create_rectangle(20, 240, 130, 350, fill='light green')
+                self.frame.create_line(130, 240, 130, 350, fill='white', width=3)
+                self.frame.create_line(20, 240, 130, 240, fill='white', width=5)
+                self.frame.create_line(20, 240, 20, 350, fill='white', width=5)
+                self.frame.create_text(70, 255, text='Goal', font="Verdana 10 bold", fill='black')
+            """state 8"""
+            if current_state == states[7][0]:
+                self.frame.create_rectangle(20, 20, 240, 240, fill='grey')
+                self.frame.create_rectangle(350, 20, 570, 240, fill='grey')
+                self.frame.create_line(240, 130, 240, 240, fill='white', width=5)
+                self.frame.create_line(350, 130, 350, 240, fill='white', width=5)
+            """state 9"""
+            if current_state == states[8][0]:
+                self.frame.create_rectangle(240, 20, 350, 130, fill='red')
+                self.frame.create_line(240, 130, 350, 130, fill='white', width=3)
+                self.frame.create_line(240, 20, 240, 130, fill='white', width=5)
+                self.frame.create_line(350, 20, 350, 130, fill='white', width=5)
+                self.frame.create_text(290, 35, text='PIT', font="Verdana 10 bold", fill='black')
+            """state 10"""
+            if current_state == states[9][0]:
+                self.frame.create_line(350, 240, 460, 240, fill='white', width=5)
+                self.frame.create_line(350, 350, 460, 350, fill='white', width=5)
+            """state 11"""
+            if current_state == states[10][0]:
+                self.frame.create_rectangle(460, 240, 570, 350, fill='red')
+                self.frame.create_line(460, 240, 460, 350, fill='white', width=3)
+                self.frame.create_line(460, 240, 570, 240, fill='white', width=5)
+                self.frame.create_line(460, 350, 570, 350, fill='white', width=5)
+                self.frame.create_text(520, 255, text='PIT', font="Verdana 10 bold", fill='black')
+            """state 12"""
+            if current_state == states[11][0]:
+                self.frame.create_line(350, 570, 350, 680, fill='white', width=5)
+            """state 13"""
+            if current_state == states[12][0]:
+                self.frame.create_rectangle(20, 680, 240, 790, fill='grey')
+                self.frame.create_line(240, 680, 240, 790, fill='white', width=5)
+                self.frame.create_line(240, 680, 20, 680, fill='white', width=5)
+            """state 14"""
+            if current_state == states[13][0]:
+                self.frame.create_line(350, 680, 460, 680, fill='white', width=5)
+            """state 15"""
+            if current_state == states[14][0]:
+                self.frame.create_rectangle(460, 680, 570, 790, fill='red')
+                self.frame.create_line(460, 680, 460, 790, fill='white', width=3)
+                self.frame.create_line(460, 680, 570, 680, fill='white', width=5)
+                self.frame.create_line(460, 790, 570, 790, fill='white', width=5)
+                self.frame.create_text(520, 695, text='PIT', font="Verdana 10 bold", fill='black')
+            """"state 16"""
+            if current_state == states[15][0]:
+                self.frame.create_rectangle(20, 680, 240, 790, fill='grey')
+                self.frame.create_line(130, 570, 240, 570, fill='white', width=5)
+                self.frame.create_line(130, 680, 240, 680, fill='white', width=5)
+                self.frame.create_line(240, 680, 240, 790, fill='white', width=5)
+            """state 17"""
+            if current_state == states[16][0]:
+                self.frame.create_line(20, 680, 130, 680, fill='white', width=5)
+            """state 18"""
+            if current_state == states[17][0]:
+                self.frame.create_line(130, 460, 130, 570, fill='white', width=5)
+            self.frame.create_line(18, 20, 570, 20, 570, 790, 20, 790, 20, 20, fill='white', width=5)
+            """state 19"""
+            if current_state == states[18][0]:
+                self.frame.create_rectangle(20, 350, 130, 460, fill='light green')
+                self.frame.create_line(20, 460, 130, 460, fill='white', width=3)
+                self.frame.create_line(130, 350, 130, 460, fill='white', width=5)
+                self.frame.create_line(20, 350, 130, 350, fill='white', width=5)
+                self.frame.create_text(70, 365, text='Goal', font="Verdana 10 bold", fill='black')
+            """"delete sensors"""
             time.sleep(0.1)
-            if i == 1:
-                self.beam_1 = self.frame.create_polygon(484 + n * x, 514 + m * y, 494 + n * x, 514 + m * y, 494 + n * x,
-                                                        516 + m * y, 486 + n * x, 516 + m * y, 486 + n * x, 514 + m * y,
-                                                        fill='yellow')
-                self.beam_2 = self.frame.create_polygon(513 + n * x, 494 + m * y, 514 + n * x, 486 + m * y, 516 + n * x,
-                                                        486 + m * y, 516 + n * x, 494 + m * y, 513 + n * x, 494 + m * y,
-                                                        fill='yellow')
-                self.beam_3 = self.frame.create_polygon(536 + n * x, 514 + m * y, 544 + n * x, 514 + m * y, 544 + n * x,
-                                                        516 + m * y, 536 + n * x, 516 + m * y, 536 + n * x, 514 + m * y,
-                                                        fill='yellow')
-                self.beam_4 = self.frame.create_polygon(514 + n * x, 536 + m * y, 514 + n * x, 544 + m * y, 516 + n * x,
-                                                        544 + m * y, 516 + n * x, 536 + m * y, 514 + n * x, 536 + m * y,
-                                                        fill='yellow')
-            if i == 2:
-                self.beam_5 = self.frame.create_polygon(484 - a + n * x, 514 + m * y, 494 - a + n * x, 514 + m * y,
-                                                        494 - a + n * x, 516 + m * y, 486 - a + n * x, 516 + m * y,
-                                                        486 - a + n * x, 514 + m * y, fill='yellow')
-                self.beam_6 = self.frame.create_polygon(513 + n * x, 494 - b + m * y, 514 + n * x, 486 - b + m * y,
-                                                        516 + n * x, 486 - b + m * y, 516 + n * x, 494 - b + m * y,
-                                                        513 + n * x, 494 - b + m * y, fill='yellow')
-                self.beam_7 = self.frame.create_polygon(536 + a + n * x, 514 + m * y, 544 + a + n * x, 514 + m * y,
-                                                        544 + a + n * x, 516 + m * y, 536 + a + n * x, 516 + m * y,
-                                                        536 + a + n * x, 514 + m * y, fill='yellow')
-                self.beam_8 = self.frame.create_polygon(514 + n * x, 536 + b + m * y, 514 + n * x, 544 + b + m * y,
-                                                        516 + n * x, 544 + b + m * y, 516 + n * x, 536 + b + m * y,
-                                                        514 + n * x, 536 + b + m * y, fill='yellow')
-            if i == 3:
-                self.beam_9 = self.frame.create_polygon(484 - 2 * a + n * x, 514 + m * y, 494 - 2 * a + n * x,
-                                                        514 + m * y, 494 - 2 * a + n * x, 516 + m * y,
-                                                        486 - 2 * a + n * x, 516 + m * y, 486 - 2 * a + n * x,
-                                                        514 + m * y, fill='yellow')
-                self.beam_10 = self.frame.create_polygon(514 + n * x, 494 - 2 * b + m * y, 514 + n * x,
-                                                         486 - 2 * b + m * y, 516 + n * x, 486 - 2 * b + m * y,
-                                                         516 + n * x, 494 - 2 * b + m * y, 514 + n * x,
-                                                         494 - 2 * b + m * y, fill='yellow')
-                self.beam_11 = self.frame.create_polygon(536 + 2 * a + n * x, 514 + m * y, 544 + 2 * a + n * x,
-                                                         514 + m * y, 544 + 2 * a + n * x, 516 + m * y,
-                                                         536 + 2 * a + n * x, 516 + m * y, 536 + 2 * a + n * x,
-                                                         514 + m * y, fill='yellow')
-                self.beam_12 = self.frame.create_polygon(514 + n * x, 536 + 2 * b + m * y, 514 + n * x,
-                                                         544 + 2 * b + m * y, 516 + n * x, 544 + 2 * b + m * y,
-                                                         516 + n * x, 536 + 2 * b + m * y, 514 + n * x,
-                                                         536 + 2 * b + m * y, fill='yellow')
-            if i == 4:
-                self.beam_13 = self.frame.create_polygon(484 - 3 * a + n * x, 514 + m * y, 494 - 3 * a + n * x,
-                                                         514 + m * y, 494 - 3 * a + n * x, 516 + m * y,
-                                                         486 - 3 * a + n * x, 516 + m * y, 486 - 3 * a + n * x,
-                                                         514 + m * y, fill='yellow')
-                self.beam_14 = self.frame.create_polygon(514 + n * x, 494 - 3 * b + m * y, 514 + n * x,
-                                                         486 - 3 * b + m * y, 516 + n * x, 486 - 3 * b + m * y,
-                                                         516 + n * x, 494 - 3 * b + m * y, 514 + n * x,
-                                                         494 - 3 * b + m * y, fill='yellow')
-                self.beam_15 = self.frame.create_polygon(536 + 3 * a + n * x, 514 + m * y, 544 + 3 * a + n * x,
-                                                         514 + m * y, 544 + 3 * a + n * x, 516 + m * y,
-                                                         536 + 3 * a + n * x, 516 + m * y, 536 + 3 * a + n * x,
-                                                         514 + m * y, fill='yellow')
-                self.beam_16 = self.frame.create_polygon(514 + n * x, 536 + 3 * b + m * y, 514 + n * x,
-                                                         544 + 3 * b + m * y, 516 + n * x, 544 + 3 * b + m * y,
-                                                         516 + n * x, 536 + 3 * b + m * y, 514 + n * x,
-                                                         536 + 3 * b + m * y, fill='yellow')
+            self.frame.delete(self.beam_1)
+            self.frame.delete(self.beam_2)
+            self.frame.delete(self.beam_3)
+            self.frame.delete(self.beam_4)
+            self.frame.delete(self.beam_5)
+            self.frame.delete(self.beam_6)
+            self.frame.delete(self.beam_7)
+            self.frame.delete(self.beam_8)
+            self.frame.delete(self.beam_9)
+            self.frame.delete(self.beam_10)
+            self.frame.delete(self.beam_11)
+            self.frame.delete(self.beam_12)
+            self.frame.delete(self.beam_13)
+            self.frame.delete(self.beam_14)
+            self.frame.delete(self.beam_15)
+            self.frame.delete(self.beam_16)
             self.frame.update()
-        """"add walls and block"""
-        """state 1"""
-        if current_state == states[0][0]:
-            self.frame.create_rectangle(350, 350, 570, 460, fill='grey')
-            self.frame.create_rectangle(350, 570, 570, 680, fill='grey')
-            self.frame.create_line(460, 460, 460, 570, fill='white', width=3)
-            self.frame.create_line(460, 460, 570, 460, fill='white', width=5)
-            self.frame.create_line(460, 570, 570, 570, fill='white', width=5)
-        """state 2"""
-        if current_state == states[1][0]:
-            self.frame.create_line(350, 460, 460, 460, fill='white', width=5)
-            self.frame.create_line(350, 570, 460, 570, fill='white', width=5)
-        """state 3"""
-        if current_state == states[2][0]:
-            self.frame.create_rectangle(130, 350, 240, 570, fill='grey')
-            self.frame.create_line(240, 460, 240, 570, fill='white', width=5)
-        """state 4"""
-        if current_state == states[3][0]:
-            self.frame.create_line(240, 350, 240, 460, fill='white', width=5)
-            self.frame.create_line(350, 350, 350, 460, fill='white', width=5)
-        """state 6"""
-        if current_state == states[5][0]:
-            self.frame.create_rectangle(20, 20, 240, 240, fill='grey')
-            self.frame.create_line(130, 240, 240, 240, fill='white', width=5)
-            self.frame.create_line(130, 350, 240, 350, fill='white', width=5)
-        """state 7"""
-        if current_state == states[6][0]:
-            self.frame.create_rectangle(20, 240, 130, 350, fill='light green')
-            self.frame.create_line(130, 240, 130, 350, fill='white', width=3)
-            self.frame.create_line(20, 240, 130, 240, fill='white', width=5)
-            self.frame.create_line(20, 240, 20, 350, fill='white', width=5)
-            self.frame.create_text(70, 255, text='Goal', font="Verdana 10 bold", fill='black')
-        """state 8"""
-        if current_state == states[7][0]:
-            self.frame.create_rectangle(20, 20, 240, 240, fill='grey')
-            self.frame.create_rectangle(350, 20, 570, 240, fill='grey')
-            self.frame.create_line(240, 130, 240, 240, fill='white', width=5)
-            self.frame.create_line(350, 130, 350, 240, fill='white', width=5)
-        """state 9"""
-        if current_state == states[8][0]:
-            self.frame.create_rectangle(240, 20, 350, 130, fill='red')
-            self.frame.create_line(240, 130, 350, 130, fill='white', width=3)
-            self.frame.create_line(240, 20, 240, 130, fill='white', width=5)
-            self.frame.create_line(350, 20, 350, 130, fill='white', width=5)
-            self.frame.create_text(290, 35, text='PIT', font="Verdana 10 bold", fill='black')
-        """state 10"""
-        if current_state == states[9][0]:
-            self.frame.create_line(350, 240, 460, 240, fill='white', width=5)
-            self.frame.create_line(350, 350, 460, 350, fill='white', width=5)
-        """state 11"""
-        if current_state == states[10][0]:
-            self.frame.create_rectangle(460, 240, 570, 350, fill='red')
-            self.frame.create_line(460, 240, 460, 350, fill='white', width=3)
-            self.frame.create_line(460, 240, 570, 240, fill='white', width=5)
-            self.frame.create_line(460, 350, 570, 350, fill='white', width=5)
-            self.frame.create_text(520, 255, text='PIT', font="Verdana 10 bold", fill='black')
-        """state 12"""
-        if current_state == states[11][0]:
-            self.frame.create_line(350, 570, 350, 680, fill='white', width=5)
-        """state 13"""
-        if current_state == states[12][0]:
-            self.frame.create_rectangle(20, 680, 240, 790, fill='grey')
-            self.frame.create_line(240, 680, 240, 790, fill='white', width=5)
-            self.frame.create_line(240, 790, 350, 790, fill='white', width=5)
-        """state 14"""
-        if current_state == states[13][0]:
-            self.frame.create_line(350, 680, 460, 680, fill='white', width=5)
-        """state 15"""
-        if current_state == states[14][0]:
-            self.frame.create_rectangle(460, 680, 570, 790, fill='red')
-            self.frame.create_line(460, 680, 460, 790, fill='white', width=3)
-            self.frame.create_line(460, 680, 570, 680, fill='white', width=5)
-            self.frame.create_line(460, 790, 570, 790, fill='white', width=5)
-            self.frame.create_text(520, 695, text='PIT', font="Verdana 10 bold", fill='black')
-        """"state 16"""
-        if current_state == states[15][0]:
-            self.frame.create_rectangle(20, 680, 240, 790, fill='grey')
-            self.frame.create_line(130, 570, 240, 570, fill='white', width=5)
-            self.frame.create_line(130, 680, 240, 680, fill='white', width=5)
-        """state 17"""
-        if current_state == states[16][0]:
-            self.frame.create_line(20, 680, 130, 680, fill='white', width=5)
-        """state 18"""
-        if current_state == states[17][0]:
-            self.frame.create_line(130, 460, 130, 570, fill='white', width=5)
-        self.frame.create_line(18, 20, 570, 20, 570, 790, 20, 790, 20, 20, fill='white', width=5)
-        """state 19"""
-        if current_state == states[18][0]:
-            self.frame.create_rectangle(20, 350, 130, 460, fill='light green')
-            self.frame.create_line(20, 460, 130, 460, fill='white', width=3)
-            self.frame.create_line(130, 350, 130, 460, fill='white', width=5)
-            self.frame.create_line(20, 350, 130, 350, fill='white', width=5)
-            self.frame.create_text(70, 365, text='Goal', font="Verdana 10 bold", fill='black')
-        """"delete sensors"""
-        time.sleep(0.1)
-        self.frame.delete(self.beam_1)
-        self.frame.delete(self.beam_2)
-        self.frame.delete(self.beam_3)
-        self.frame.delete(self.beam_4)
-        self.frame.delete(self.beam_5)
-        self.frame.delete(self.beam_6)
-        self.frame.delete(self.beam_7)
-        self.frame.delete(self.beam_8)
-        self.frame.delete(self.beam_9)
-        self.frame.delete(self.beam_10)
-        self.frame.delete(self.beam_11)
-        self.frame.delete(self.beam_12)
-        self.frame.delete(self.beam_13)
-        self.frame.delete(self.beam_14)
-        self.frame.delete(self.beam_15)
-        self.frame.delete(self.beam_16)
-        self.frame.update()
 
     def robot_search_phase(self):
 
